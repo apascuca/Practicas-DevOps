@@ -1,0 +1,32 @@
+version: '2'
+services:
+
+  web:
+
+    container_name: php-apache
+
+    build: ./php-apache
+
+    ports:
+      - "8080:80"
+
+    networks:
+      - mi_red
+
+  db:
+
+    container_name: my-mongo
+
+    build: ./mongo
+
+    ports:
+      - "27017"
+
+    networks:
+      - mi_red
+
+    volumes:
+      - ./mongo/volumen_mongo:/data:z
+
+networks:
+  mi_red:
