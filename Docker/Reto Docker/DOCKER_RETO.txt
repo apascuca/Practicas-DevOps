@@ -1,0 +1,114 @@
+Diferencias entre contenedores y máquinas virtuales:
+
+
+
+Maquina virtual: Primero en el nivel mas bajo esta el S.O (Host), despues necesita la herramienta de virtualizacion (Hypervisor) donde podemos administrar los recursos de la maquina, luego estaria en S.O virtualizado, y por ultimo tendriamos las librerias y las APPs en 2 niveles distintos.
+
+
+Docker Contenedor: Primero en el nivel mas bajo esta el S.O (Host), en el siguiente nivel estaria el Docker y por encima del docker ya estaria el contenedor que en su interior tiene almacenado las librerias y las APPs.
+
+
+
+
+
+¿Qué es Docker?:
+
+
+Docker es una plataforma para desarrolladores para implementar, ejecutar y desarrollar aplicaciones con contenedores.
+
+Son contenedores ligeros y portables para las aplicaciones que puedan ejecutarse en cualquier máquina con Docker instalado, independientemente del sistema operativo que la máquina tenga por debajo, facilitando así también los despliegues.
+
+
+
+
+
+Diferencias entre imagen Docker y contenedor Docker:
+
+
+Imagen Docker: Es una plantilla que contiene todo lo necesario para desplegar una aplicacion web.
+
+Por ejemplo una imagen podría contener un sistema operativo con un servidor Apache y tu aplicación web instalada.
+
+Las imágenes se utilizan para crear contenedores.
+
+Las imágenes se pueden identificar por nombre-version, por ejemplo: ubuntu:latest, ubuntu:18.04.
+
+
+Contenedor Docker: Es una instancia donde se puede ejecutar una plantilla.
+
+Son los que ejecutarán nuestra aplicación.
+
+A partir de una única imagen, podemos ejecutar varios contenedores.
+
+Pueden ser balanceadores de carga y distribuir las peticiones en cada contenedor.
+
+
+
+¿Qué es Docker Swarm?:
+
+
+Es una herramienta integrada en Docker que permite la gestion de clusters de servidores.
+
+Nos proporciona una API con la que podemos administrar las  tareas y asignación de recursos de cada contenedor dentro de cada una de las máquinas. Esta API nos permite gestionar el cluster como si fuese una sola máquina Docker.
+
+
+
+
+Buenas prácticas de creación de imágenes Dockerfile:
+
+
+
+FROM ubuntu:18.04
+COPY . /app
+RUN make /app
+
+
+
+FROM: Es la imagen que quieres escoger para montar tu contenedor. 
+COPY: Copia archivos dentro del contenedor.
+RUN: Ejecuta los comandos que queramos para instalar paquetes
+
+
+Explicar 10 comandos básicos de docker y su utilidad:
+
+
+
+Docker create --> Crea un nuevo contenedor.
+
+Docker images --> Te muestra las imaganes que tienes descargadas.
+
+Docker ps -a --> Te muestras todos los contenedores que estan corriendo.
+
+Docker build . --> Te descarga e instala la imagen, (Construye), a partir de la carpeta en la que se encuentre el Dockerfile.
+
+Docker run -d -p --> Pone en funcionamiento un contenedor, en segundo plano (-d) y el puerto especifico que le hayas señalado (-p).
+
+Docker rmi --> Elimina una imagen.
+
+Docker rm --> Elimina un contenedor.
+
+Docker start --> Inicia un contenedor parado.
+
+Docker stop --> Para un contendor iniciado.
+
+Docker exec -it nombre-contenedor /bin/bash --> Ejecuta un terminal temporal dentro del contenedor.
+
+
+
+
+¿Qué es un Docker Registry? Dar ejemplos 
+
+
+Es un lugar de almacenamiento y distribución para imágenes de Docker.
+
+Docker Hub es uno de los mas utilizados, también tenemos  Amazon Elastic Container Registry o Quay.
+
+
+
+
+¿Qué es Docker Compose?:
+
+
+Es una herramienta que permite simplificar el uso de Docker, generando scripts que facilitan el diseño y la construccion de servicios.
+
+Te permite crear diferentes contenedores y al mismo tiempo, en cada contenedor, diferentes servicios.
