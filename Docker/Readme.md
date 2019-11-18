@@ -8,4 +8,5 @@ cuando se ponga a correr el contenedor etc...
 
 ### Practica con Docker-Compose.yaml
 
-Con este fichero podremos levantar varios contenedores con sus servicios a la vez, ahorrandonos tambien el docker run.
+Con este fichero podremos levantar varios contenedores con sus servicios a la vez, ahorrandonos tambien el docker run del 
+Dockerfile.
