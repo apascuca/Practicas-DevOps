@@ -1,0 +1,9 @@
+yum install -y ansible
+
+pasar la clave que utilizamos para abrir la maquina publica
+
+generar 2 claves con ssh-keygen y pasar la publica a la maquina privada.
+
+ssh -i formacion-madrid.pem centos@192.168.3.6
+
+ansible-playbook httpd.yaml, se lanza asi los playbooks

@@ -1,0 +1,37 @@
+---
+- hosts: webservers
+  vars:
+    http_port: 8080
+    remote_user: !vault |
+          $ANSIBLE_VAULT;1.1;AES256
+          37323735303364386230393761373666666564636237373239346637303038383638396334373261
+          6338616630373231323436663136313065323866623432660a623363383934663966643231316239
+          63646665663132616339386365356436306436326437336163346434326363303064396131333133
+          6638383261636537370a353638646562633539316561343033653161616665616236653562356139
+          3030
+  tasks:
+  - name: Instalar apache
+    action: yum name=httpd state=installed
+  - name: Activar apache al arranque
+    service: name=httpd enabled=yes
+  - name: Instalar PhP
+    action: yum name=php state=present
+  - name: Copy html
+    copy: src=/home/centos/index.html dest=/var/www/html/index.html
+  - name: Copy archivo.php
+    copy: src=/home/centos/datos.php dest=/var/www/html/datos.php
+  - name: Open port 80 for http access
+    firewalld:
+      service: http
+      permanent: true
+      state: enabled
+  - name: Restart the firewalld service to load in the firewall changes
+    service:
+      name: firewalld
+      state: restarted
+  - name: Asegurar que apache esta corriendo
+    service:
+      name: httpd
+      state: started
+  - debug:
+      msg: "Nombre de usuario: {{ remote_user }}"

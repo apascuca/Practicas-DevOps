@@ -1,0 +1,24 @@
+---
+- hosts: webservers
+  vars:
+    mysql_port: 3306
+    remote_user: root
+  tasks:
+  - name: copiar repo file
+    copy: src=/etc/yum.repos.d/epel.repo dest=/etc/yum.repos.d/epel.repo
+  - name: instalar wget
+    yum: name=wget state=installed
+  - name: Instalar python
+    yum: name=MySQL-python state=installed
+  - name: Download lib
+    get_url: url=http://repo.mysql.com/mysql-community-release-el7-5.noarch.rpm dest=/usr/mysql/mysql-community-release-el7-5.noarch.rpm
+  - name: Instalar rpm
+    yum: name=/usr/mysql/mysql-community-release-el7-5.noarch.rpm state=present
+  - name: Instalacion MySQL
+    yum: name=mysql-server state=installed
+  - name: Start SQLService
+    service: name=mysqld state=restarted
+  - name: creacion de db
+    mysql_db: name=formulario state=present
+  - name: restart mysql
+    service: name=mysql state=restarted
